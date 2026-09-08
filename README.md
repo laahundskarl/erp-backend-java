@@ -1,5 +1,7 @@
 # ERP Backend - Order Management API
 
+[![CI](https://github.com/laahundskarl/erp-backend-java/actions/workflows/ci.yml/badge.svg)](https://github.com/laahundskarl/erp-backend-java/actions/workflows/ci.yml)
+
 Backend REST service for a simplified ERP order-management module: a catalog of products
 and services, orders, and order line items.
 
@@ -52,6 +54,9 @@ Unit tests (`*Test`) cover service-layer business rules with Mockito, with no Sp
 and no database. Integration tests (`*IT`) boot the full Spring context (mock web layer, no
 real server socket) against a real PostgreSQL container and exercise the REST controllers
 end-to-end with MockMvc, including validation, pagination, filters and error responses.
+
+A [GitHub Actions workflow](.github/workflows/ci.yml) runs this same `./mvnw verify` on every
+pull request.
 
 ## Domain model and business rules
 
