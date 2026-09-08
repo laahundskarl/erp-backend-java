@@ -1,4 +1,4 @@
-# ERP Backend — Order Management API
+# ERP Backend - Order Management API
 
 Backend REST service for a simplified ERP order-management module: a catalog of products
 and services, orders, and order line items.
