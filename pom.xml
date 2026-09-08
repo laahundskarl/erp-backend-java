@@ -12,7 +12,7 @@
 	<artifactId>erp-backend-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>erp-backend-java</name>
-	<description>ERP order management backend - Level III assessment</description>
+	<description>ERP order management backend - catalog, orders and order items</description>
 	<url/>
 	<licenses>
 		<license/>
