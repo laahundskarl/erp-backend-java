@@ -1,8 +1,7 @@
 # ERP Backend — Order Management API
 
 Backend REST service for a simplified ERP order-management module: a catalog of products
-and services, orders, and order line items — built for the Level III tier of a Java backend
-coding assessment.
+and services, orders, and order line items.
 
 ## Tech stack
 
@@ -74,8 +73,8 @@ Enforced rules:
    items — never persisted — as `productsTotal × (1 − discount/100) + servicesTotal`.
 
 **Deliberately out of scope:** adding/removing/editing items on a `CLOSED` order is *not*
-blocked. The assessment only requires gating the discount change on a closed order; extending
-that restriction to line items as well would be an unrequested rule, so it was left alone.
+blocked. Only the discount change is gated on order status; extending that restriction to line
+items as well was left out to keep the rule set intentional rather than speculative.
 
 ## API overview
 

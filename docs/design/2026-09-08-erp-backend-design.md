@@ -1,6 +1,4 @@
-# ERP Backend — Design Notes (Level III)
-
-Source requirements: a Java backend coding assessment specification, Level III tier.
+# ERP Backend — Design Notes
 
 ## Goal
 
@@ -10,7 +8,7 @@ discount, deactivation and referential-integrity rules described below.
 
 ## Stack
 
-- Java 21, Spring Boot 3.3, Maven (via Maven Wrapper — no local Maven install required)
+- Java 21, Spring Boot 4.1, Maven (via Maven Wrapper — no local Maven install required)
 - Spring Web, Spring Data JPA, PostgreSQL 16
 - QueryDSL (dynamic filters on list endpoints)
 - Bean Validation (Jakarta Validation) on request DTOs
@@ -34,7 +32,7 @@ the underlying items.
 `grandTotal = productsTotal * (1 - discountPercentage / 100) + servicesTotal`,
 where `productsTotal`/`servicesTotal` are the summed `unitPrice * quantity` of items whose
 `catalogItem.type` is `PRODUCT` / `SERVICE` respectively. The discount never applies to
-service items, per the requirement.
+service items.
 
 ## Business rules (enforced in the service layer, not just validation)
 
@@ -46,7 +44,7 @@ service items, per the requirement.
 ## API shape
 
 Each entity gets a full top-level REST resource (Create/Read/Update/Delete/paginated List),
-since the spec lists all three as independent, first-class registrations:
+since all three are independent, first-class registrations:
 
 - `/api/catalog-items` — filters: `name`, `type`, `active`
 - `/api/orders` — filters: `status`, date range; plus `PATCH /api/orders/{id}/status` to
@@ -74,12 +72,12 @@ and optionally `fieldErrors[]`.
   delete guard, inactive-item guard, total calculation.
 - Integration tests (`@SpringBootTest` + Testcontainers `PostgreSQLContainer`) for
   repositories/QueryDSL filters and for controllers end-to-end (status codes, validation,
-  pagination). Requires Docker to be running locally to execute `./mvnw test`.
+  pagination). Requires Docker to be running locally to execute `./mvnw verify`.
 
-## Out of scope (YAGNI, not requested by the spec)
+## Out of scope (YAGNI)
 
 - Authentication/authorization
 - Customer/party entities
-- Blocking item add/remove on a `CLOSED` order (the spec only requires blocking the discount
-  change on closed orders — extending the block to items would be an unrequested rule). This
-  is called out again in the README so it reads as a deliberate scope decision.
+- Blocking item add/remove on a `CLOSED` order — only the discount change is gated on order
+  status; extending that block to line items would be a speculative rule. This is called out
+  again in the README so it reads as a deliberate scope decision.
