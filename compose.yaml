@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:16'
+    environment:
+      - 'POSTGRES_DB=erp_db'
+      - 'POSTGRES_PASSWORD=erp_password'
+      - 'POSTGRES_USER=erp_user'
+    ports:
+      - '5432:5432'
